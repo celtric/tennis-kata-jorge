@@ -37,19 +37,15 @@ class Score {
         return new Score(player1Score.opponentScored(), player2Score.next(player1Score));
     }
 
-    Result result() {
-        if (player1Score.equals(Points.WON)) {
-            return Result.winner(Player.A);
-        } else if (player2Score.equals(Points.WON)) {
-            return Result.winner(Player.B);
-        } else if (player1Score.equals(Points.FORTY) && player2Score.equals(Points.FORTY)) {
-            return Result.deuce();
-        } else if (player1Score.equals(Points.ADVANTAGE) && player2Score.equals(Points.FORTY)) {
-            return Result.advantage(Player.A);
-        } else if (player1Score.equals(Points.FORTY) && player2Score.equals(Points.ADVANTAGE)) {
-            return Result.advantage(Player.B);
-        } else {
-            return Result.inPlay();
-        }
+    boolean hasPlayer1Won() {
+        return player1Score.equals(Points.WON);
+    }
+
+    boolean isDeuce() {
+        return player1Score.equals(Points.FORTY) && player2Score.equals(Points.FORTY);
+    }
+
+    boolean hasPlayer1Advantage() {
+        return player1Score.equals(Points.ADVANTAGE) && player2Score.equals(Points.FORTY);
     }
 }
