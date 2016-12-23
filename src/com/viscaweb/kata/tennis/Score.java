@@ -30,23 +30,11 @@ class Score {
     }
 
     Score sumScoreToPlayer1() {
-        Point newPlayer1Score = player1Score;
-        Point newPlayer2Score = player2Score;
-
-        newPlayer2Score = newPlayer2Score.opponentScored();
-        newPlayer1Score = newPlayer1Score.next(player2Score);
-
-        return new Score(newPlayer1Score, newPlayer2Score);
+        return new Score(player1Score.next(player2Score), player2Score.opponentScored());
     }
 
     Score sumScoreToPlayer2() {
-        Point newPlayer1Score = player1Score;
-        Point newPlayer2Score = player2Score;
-
-        newPlayer1Score = newPlayer1Score.opponentScored();
-        newPlayer2Score = newPlayer2Score.next(player1Score);
-
-        return new Score(newPlayer1Score, newPlayer2Score);
+        return new Score(player1Score.opponentScored(), player2Score.next(player1Score));
     }
 
     Function<Score, Result> checkWin = o -> {
