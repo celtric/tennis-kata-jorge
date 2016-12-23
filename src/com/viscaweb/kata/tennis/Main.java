@@ -102,6 +102,14 @@ public class Main {
             return "TEST ----> winner: " + winner + ", advantage: " + advantage
                     + ", advantageFor: " + advantageFor + ", deuce: " + deuce + "\n";
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof Result) {
+                return obj.toString().equals(toString());
+            }
+            return super.equals(obj);
+        }
     }
 
     static class Game {
