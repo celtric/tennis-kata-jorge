@@ -18,6 +18,10 @@ class Score {
                 default:      throw new RuntimeException("Not implemented");
             }
         }
+
+        private Point opponentScored() {
+            return equals(ADVANTAGE) ? FORTY : this;
+        }
     }
 
     Score(Point player1Score, Point player2Score) {
@@ -29,10 +33,7 @@ class Score {
         Point newPlayer1Score = player1Score;
         Point newPlayer2Score = player2Score;
 
-        if (player2Score.equals(Point.ADVANTAGE)) {
-            newPlayer2Score = Point.FORTY;
-        }
-
+        newPlayer2Score = newPlayer2Score.opponentScored();
         newPlayer1Score = newPlayer1Score.next(player2Score);
 
         return new Score(newPlayer1Score, newPlayer2Score);
@@ -42,10 +43,7 @@ class Score {
         Point newPlayer1Score = player1Score;
         Point newPlayer2Score = player2Score;
 
-        if (player1Score.equals(Point.ADVANTAGE)) {
-            newPlayer1Score = Point.FORTY;
-        }
-
+        newPlayer1Score = newPlayer1Score.opponentScored();
         newPlayer2Score = newPlayer2Score.next(player1Score);
 
         return new Score(newPlayer1Score, newPlayer2Score);
