@@ -1,10 +1,10 @@
 package com.viscaweb.kata.tennis;
 
 class Result {
-    String winner = null;
-    Boolean advantage = null;
-    String advantageFor = null;
-    Boolean deuce = null;
+    private final String winner;
+    private final Boolean advantage;
+    private final String advantageFor;
+    private final Boolean deuce;
 
     Result(String winner, Boolean advantage, String advantageFor, Boolean deuce) {
         this.winner = winner;
