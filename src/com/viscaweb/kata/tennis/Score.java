@@ -1,7 +1,5 @@
 package com.viscaweb.kata.tennis;
 
-import java.util.function.Function;
-
 class Score {
     private Points player1Score;
     private Points player2Score;
@@ -24,6 +22,8 @@ class Score {
         }
     }
 
+    enum Player { NONE, A, B }
+
     Score(Points player1Score, Points player2Score) {
         this.player1Score = player1Score;
         this.player2Score = player2Score;
@@ -37,26 +37,19 @@ class Score {
         return new Score(player1Score.opponentScored(), player2Score.next(player1Score));
     }
 
-    Function<Score, Result> checkWin = o -> {
-        if (player1Score.equals(Points.WON))
-            return new Result("Player 1 win", false, "", false);
-        else
-            return new Result("", false, "", false);
-    };
-
-    Function<Score, Result> checkDeuce = o -> {
-        if (player1Score.equals(Points.FORTY) && player2Score.equals(Points.FORTY))
-            return new Result("", false, "", true);
-        else
-            return new Result("", false, "", false);
-    };
-
-    Function<Score, Result> checkAdvantage = o -> {
-        if (player1Score.equals(Points.ADVANTAGE) && player2Score.equals(Points.FORTY))
-            return new Result("", true, "Player 1", false);
-        else if (player1Score.equals(Points.FORTY) && player2Score.equals(Points.ADVANTAGE))
-            return new Result("", true, "Player 2", false);
-        else
-            return new Result("", false, "", false);
-    };
+    Result result() {
+        if (player1Score.equals(Points.WON)) {
+            return Result.winner(Player.A);
+        } else if (player2Score.equals(Points.WON)) {
+            return Result.winner(Player.B);
+        } else if (player1Score.equals(Points.FORTY) && player2Score.equals(Points.FORTY)) {
+            return Result.deuce();
+        } else if (player1Score.equals(Points.ADVANTAGE) && player2Score.equals(Points.FORTY)) {
+            return Result.advantage(Player.A);
+        } else if (player1Score.equals(Points.FORTY) && player2Score.equals(Points.ADVANTAGE)) {
+            return Result.advantage(Player.B);
+        } else {
+            return Result.inPlay();
+        }
+    }
 }
