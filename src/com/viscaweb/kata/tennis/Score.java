@@ -22,8 +22,6 @@ class Score {
         }
     }
 
-    enum Player { NONE, A, B }
-
     Score(Points player1Score, Points player2Score) {
         this.player1Score = player1Score;
         this.player2Score = player2Score;
