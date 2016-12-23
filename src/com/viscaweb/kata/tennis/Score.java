@@ -21,16 +21,11 @@ class Score {
 
     private Point doStringScore(Integer plainScore) {
         switch (plainScore) {
-            case 1:
-                return Point.FIFTEEN;
-            case 2:
-                return Point.THIRTY;
-            case 3:
-                return Point.FORTY;
-            case 4:
-                return Point.ADVANTAGE;
-            default:
-                return Point.LOVE;
+            case 1:  return Point.FIFTEEN;
+            case 2:  return Point.THIRTY;
+            case 3:  return Point.FORTY;
+            case 4:  return Point.ADVANTAGE;
+            default: return Point.LOVE;
         }
     }
 
