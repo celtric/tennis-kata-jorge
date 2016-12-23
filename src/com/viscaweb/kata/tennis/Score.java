@@ -3,11 +3,13 @@ package com.viscaweb.kata.tennis;
 import java.util.function.Function;
 
 class Score {
-    private String player1Score = null;
-    private String player2Score = null;
+    private Point player1Score = null;
+    private Point player2Score = null;
 
     private Integer player1PlainScore;
     private Integer player2PlainScore;
+
+    enum Point { LOVE, FIFTEEN, THIRTY, FORTY, ADVANTAGE }
 
     Score(final Integer player1PlainScore, final Integer player2PlainScore) {
         this.player1PlainScore = player1PlainScore;
@@ -17,18 +19,18 @@ class Score {
         this.player2Score = doStringScore(player2PlainScore);
     }
 
-    private String doStringScore(Integer plainScore) {
+    private Point doStringScore(Integer plainScore) {
         switch (plainScore) {
             case 1:
-                return "15";
+                return Point.FIFTEEN;
             case 2:
-                return "30";
+                return Point.THIRTY;
             case 3:
-                return "40";
+                return Point.FORTY;
             case 4:
-                return "A";
+                return Point.ADVANTAGE;
             default:
-                return "0";
+                return Point.LOVE;
         }
     }
 
@@ -66,16 +68,16 @@ class Score {
     };
 
     Function<Score, Result> checkDeuce = o -> {
-        if (player1Score.equals("40") && player2Score.equals("40"))
+        if (player1Score.equals(Point.FORTY) && player2Score.equals(Point.FORTY))
             return new Result("", false, "", true);
         else
             return new Result("", false, "", false);
     };
 
     Function<Score, Result> checkAdvantage = o -> {
-        if (player1Score.equals("A") && player2Score.equals("40"))
+        if (player1Score.equals(Point.ADVANTAGE) && player2Score.equals(Point.FORTY))
             return new Result("", true, "Player 1", false);
-        else if (player1Score.equals("40") && player2Score.equals("A"))
+        else if (player1Score.equals(Point.FORTY) && player2Score.equals(Point.ADVANTAGE))
             return new Result("", true, "Player 2", false);
         else
             return new Result("", false, "", false);
