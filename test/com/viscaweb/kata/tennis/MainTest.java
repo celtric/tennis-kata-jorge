@@ -1,6 +1,6 @@
 package com.viscaweb.kata.tennis;
 
-import com.viscaweb.kata.tennis.Score.Point;
+import com.viscaweb.kata.tennis.Score.Points;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -28,13 +28,13 @@ public class MainTest {
     //---[ Helpers ]--------------------------------------------------------------------//
 
     private Result win() {
-        final Score finalScore = new Score(Point.FORTY, Point.LOVE)
+        final Score finalScore = new Score(Points.FORTY, Points.LOVE)
                 .sumScoreToPlayer1();
         return finalScore.checkWin.apply(null);
     }
 
     private Result deuce() {
-        final Score finalScore = new Score(Point.LOVE, Point.LOVE)
+        final Score finalScore = new Score(Points.LOVE, Points.LOVE)
                 .sumScoreToPlayer1()
                 .sumScoreToPlayer1()
                 .sumScoreToPlayer1()
@@ -45,7 +45,7 @@ public class MainTest {
     }
 
     private Result advantage() {
-        final Score finalScore = new Score(Point.LOVE, Point.LOVE)
+        final Score finalScore = new Score(Points.LOVE, Points.LOVE)
                 .sumScoreToPlayer1()
                 .sumScoreToPlayer1()
                 .sumScoreToPlayer1()
