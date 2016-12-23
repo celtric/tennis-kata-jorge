@@ -13,15 +13,14 @@ class Result {
         this.deuce = deuce;
     }
 
-    @Override public String toString() {
-        return "TEST ----> winner: " + winner + ", advantage: " + advantage
-                + ", advantageFor: " + advantageFor + ", deuce: " + deuce + "\n";
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Result) {
-            return obj.toString().equals(toString());
+            Result other = (Result) obj;
+            return other.winner.equals(winner)
+                    && other.advantage.equals(advantage)
+                    && other.advantageFor.equals(advantageFor)
+                    && other.deuce.equals(deuce);
         }
         return super.equals(obj);
     }
