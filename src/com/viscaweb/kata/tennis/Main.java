@@ -63,25 +63,25 @@ public class Main {
 
         Function<Score, Result> checkWin = o -> {
             if (this.player1PlainScore >= 3 && this.player1PlainScore - this.player2PlainScore >= 2)
-                return new Result("Player 1 win", Boolean.FALSE, null, Boolean.FALSE);
+                return new Result("Player 1 win", false, null, false);
             else
-                return new Result(null, Boolean.FALSE, null, Boolean.FALSE);
+                return new Result(null, false, null, false);
         };
 
         Function<Score, Result> checkDeuce = o -> {
             if (this.player1Score.equals("40") && this.player2Score.equals("40"))
-                return new Result(null, Boolean.FALSE, null, Boolean.TRUE);
+                return new Result(null, false, null, true);
             else
-                return new Result(null, Boolean.FALSE, null, Boolean.FALSE);
+                return new Result(null, false, null, false);
         };
 
         Function<Score, Result> checkAdvantage = o -> {
             if (this.player1Score.equals("A") && this.player2Score.equals("40"))
-                return new Result(null, Boolean.TRUE, "Player 1", Boolean.FALSE);
+                return new Result(null, true, "Player 1", false);
             else if (this.player1Score.equals("40") && this.player2Score.equals("A"))
-                return new Result(null, Boolean.TRUE, "Player 2", Boolean.FALSE);
+                return new Result(null, true, "Player 2", false);
             else
-                return new Result(null, Boolean.FALSE, null, Boolean.FALSE);
+                return new Result(null, false, null, false);
         };
     }
 
