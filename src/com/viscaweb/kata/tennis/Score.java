@@ -3,60 +3,56 @@ package com.viscaweb.kata.tennis;
 import java.util.function.Function;
 
 class Score {
-    private Point player1Score = null;
-    private Point player2Score = null;
+    private Point player1Score;
+    private Point player2Score;
 
-    private Integer player1PlainScore;
-    private Integer player2PlainScore;
+    enum Point {
+        LOVE, FIFTEEN, THIRTY, FORTY, ADVANTAGE, WON;
 
-    enum Point { LOVE, FIFTEEN, THIRTY, FORTY, ADVANTAGE }
-
-    Score(final Integer player1PlainScore, final Integer player2PlainScore) {
-        this.player1PlainScore = player1PlainScore;
-        this.player2PlainScore = player2PlainScore;
-
-        this.player1Score = toPoint(player1PlainScore);
-        this.player2Score = toPoint(player2PlainScore);
+        private Point next(Point opponent) {
+            switch (this) {
+                case LOVE:    return FIFTEEN;
+                case FIFTEEN: return THIRTY;
+                case THIRTY:  return FORTY;
+                case FORTY:   return opponent.equals(FORTY) ? ADVANTAGE : WON;
+                default:      throw new RuntimeException("Not implemented");
+            }
+        }
     }
 
-    private Point toPoint(Integer plainScore) {
-        switch (plainScore) {
-            case 1:  return Point.FIFTEEN;
-            case 2:  return Point.THIRTY;
-            case 3:  return Point.FORTY;
-            case 4:  return Point.ADVANTAGE;
-            default: return Point.LOVE;
-        }
+    Score(Point player1Score, Point player2Score) {
+        this.player1Score = player1Score;
+        this.player2Score = player2Score;
     }
 
     Score sumScoreToPlayer1() {
-        Integer newPlayer1Score = player1PlainScore;
-        Integer newPlayer2Score = player2PlainScore;
+        Point newPlayer1Score = player1Score;
+        Point newPlayer2Score = player2Score;
 
-        if (player2PlainScore == 4) {
-            newPlayer2Score = 3;
+        if (player2Score.equals(Point.ADVANTAGE)) {
+            newPlayer2Score = Point.FORTY;
         }
 
-        newPlayer1Score++;
+        newPlayer1Score = newPlayer1Score.next(player2Score);
 
         return new Score(newPlayer1Score, newPlayer2Score);
     }
 
     Score sumScoreToPlayer2() {
-        Integer newPlayer1Score = player1PlainScore;
-        Integer newPlayer2Score = player2PlainScore;
+        Point newPlayer1Score = player1Score;
+        Point newPlayer2Score = player2Score;
 
-        if (player1PlainScore == 4) {
-            newPlayer1Score = 3;
+        if (player1Score.equals(Point.ADVANTAGE)) {
+            newPlayer1Score = Point.FORTY;
         }
 
-        newPlayer2Score++;
+        newPlayer2Score = newPlayer2Score.next(player1Score);
 
         return new Score(newPlayer1Score, newPlayer2Score);
     }
 
     Function<Score, Result> checkWin = o -> {
-        if (player1PlainScore >= 3 && player1PlainScore - player2PlainScore >= 2)
+        if (player1Score.equals(Point.WON))
             return new Result("Player 1 win", false, "", false);
         else
             return new Result("", false, "", false);
