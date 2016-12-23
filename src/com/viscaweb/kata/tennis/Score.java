@@ -15,11 +15,11 @@ class Score {
         this.player1PlainScore = player1PlainScore;
         this.player2PlainScore = player2PlainScore;
 
-        this.player1Score = doStringScore(player1PlainScore);
-        this.player2Score = doStringScore(player2PlainScore);
+        this.player1Score = toPoint(player1PlainScore);
+        this.player2Score = toPoint(player2PlainScore);
     }
 
-    private Point doStringScore(Integer plainScore) {
+    private Point toPoint(Integer plainScore) {
         switch (plainScore) {
             case 1:  return Point.FIFTEEN;
             case 2:  return Point.THIRTY;
