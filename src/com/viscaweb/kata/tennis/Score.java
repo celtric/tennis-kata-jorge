@@ -33,10 +33,10 @@ class Score {
     }
 
     Score sumScoreToPlayer1() {
-        Integer newPlayer1Score = this.player1PlainScore;
-        Integer newPlayer2Score = this.player2PlainScore;
+        Integer newPlayer1Score = player1PlainScore;
+        Integer newPlayer2Score = player2PlainScore;
 
-        if (this.player2PlainScore == 4) {
+        if (player2PlainScore == 4) {
             newPlayer2Score = 3;
         }
 
@@ -46,10 +46,10 @@ class Score {
     }
 
     Score sumScoreToPlayer2() {
-        Integer newPlayer1Score = this.player1PlainScore;
-        Integer newPlayer2Score = this.player2PlainScore;
+        Integer newPlayer1Score = player1PlainScore;
+        Integer newPlayer2Score = player2PlainScore;
 
-        if (this.player1PlainScore == 4) {
+        if (player1PlainScore == 4) {
             newPlayer1Score = 3;
         }
 
@@ -59,23 +59,23 @@ class Score {
     }
 
     Function<Score, Result> checkWin = o -> {
-        if (this.player1PlainScore >= 3 && this.player1PlainScore - this.player2PlainScore >= 2)
+        if (player1PlainScore >= 3 && player1PlainScore - player2PlainScore >= 2)
             return new Result("Player 1 win", false, "", false);
         else
             return new Result("", false, "", false);
     };
 
     Function<Score, Result> checkDeuce = o -> {
-        if (this.player1Score.equals("40") && this.player2Score.equals("40"))
+        if (player1Score.equals("40") && player2Score.equals("40"))
             return new Result("", false, "", true);
         else
             return new Result("", false, "", false);
     };
 
     Function<Score, Result> checkAdvantage = o -> {
-        if (this.player1Score.equals("A") && this.player2Score.equals("40"))
+        if (player1Score.equals("A") && player2Score.equals("40"))
             return new Result("", true, "Player 1", false);
-        else if (this.player1Score.equals("40") && this.player2Score.equals("A"))
+        else if (player1Score.equals("40") && player2Score.equals("A"))
             return new Result("", true, "Player 2", false);
         else
             return new Result("", false, "", false);
