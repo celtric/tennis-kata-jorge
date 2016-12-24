@@ -27,11 +27,11 @@ final class Score {
         this.player2Score = player2Points;
     }
 
-    Score sumScoreToPlayer1() {
+    Score player1Scored() {
         return new Score(player1Points.next(player2Score), player2Score.opponentScored());
     }
 
-    Score sumScoreToPlayer2() {
+    Score player2Scored() {
         return new Score(player1Points.opponentScored(), player2Score.next(player1Points));
     }
 
