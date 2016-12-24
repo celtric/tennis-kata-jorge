@@ -44,6 +44,6 @@ final class Score {
     }
 
     boolean hasPlayer1Advantage() {
-        return player1Points.equals(Points.ADVANTAGE) && player2Score.equals(Points.FORTY);
+        return player1Points.equals(Points.ADVANTAGE);
     }
 }
