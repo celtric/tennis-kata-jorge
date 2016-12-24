@@ -2,7 +2,7 @@ package com.viscaweb.kata.tennis;
 
 final class Score {
     private final Points player1Points;
-    private final Points player2Score;
+    private final Points player2Points;
 
     enum Points {
         LOVE, FIFTEEN, THIRTY, FORTY, ADVANTAGE, WON;
@@ -24,15 +24,15 @@ final class Score {
 
     Score(Points player1Points, Points player2Points) {
         this.player1Points = player1Points;
-        this.player2Score = player2Points;
+        this.player2Points = player2Points;
     }
 
     Score player1Scored() {
-        return new Score(player1Points.next(player2Score), player2Score.opponentScored());
+        return new Score(player1Points.next(player2Points), player2Points.opponentScored());
     }
 
     Score player2Scored() {
-        return new Score(player1Points.opponentScored(), player2Score.next(player1Points));
+        return new Score(player1Points.opponentScored(), player2Points.next(player1Points));
     }
 
     boolean hasPlayer1Won() {
@@ -40,7 +40,7 @@ final class Score {
     }
 
     boolean isDeuce() {
-        return player1Points.equals(Points.FORTY) && player2Score.equals(Points.FORTY);
+        return player1Points.equals(Points.FORTY) && player2Points.equals(Points.FORTY);
     }
 
     boolean hasPlayer1Advantage() {
