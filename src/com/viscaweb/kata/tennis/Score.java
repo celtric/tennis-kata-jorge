@@ -1,8 +1,8 @@
 package com.viscaweb.kata.tennis;
 
-class Score {
-    private Points player1Score;
-    private Points player2Score;
+final class Score {
+    private final Points player1Score;
+    private final Points player2Score;
 
     enum Points {
         LOVE, FIFTEEN, THIRTY, FORTY, ADVANTAGE, WON;
